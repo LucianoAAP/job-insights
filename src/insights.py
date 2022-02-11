@@ -63,29 +63,37 @@ def get_min_salary(path):
     pass
 
 
+def validate_salary_range(job):
+    if 'min_salary' not in job or 'max_salary' not in job:
+        raise ValueError('Job must contain a "min_salary" and a "max_salary"')
+    if (
+        not str(job['min_salary']).isdigit()
+        or not str(job['max_salary']).isdigit()
+       ):
+        raise ValueError('Min and max salaries must contain only digits')
+    if int(job['min_salary']) > int(job['max_salary']):
+        raise ValueError('"min_salary" is bigger than "max_salary"')
+
+
+def validate_salary_value(salary):
+    if type(salary) != int and type(salary) != str:
+        raise ValueError('Salary must be valid')
+    if not str(salary).isdigit() and int(salary) > 0:
+        raise ValueError('Salary must contain only digits')
+
+
 def matches_salary_range(job, salary):
-    """Checks if a given salary is in the salary range of a given job
+    validate_salary_range(job)
+    validate_salary_value(salary)
 
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
+    if (
+        int(salary) >= int(job['min_salary'])
+        and int(salary) <= int(job['max_salary'])
+       ):
+        return True
 
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
+    return False
 
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
     pass
 
 
