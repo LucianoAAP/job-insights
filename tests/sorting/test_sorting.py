@@ -22,6 +22,7 @@ jobs_mock = [
     },
 ]
 
+
 jobs_sorted_by_date_posted = [
     {
         'title': 'Back end developer',
@@ -87,14 +88,14 @@ jobs_sorted_by_min_salary = [
 
 
 def test_sort_by_criteria():
-    sort_by(jobs_mock, 'date_posted')
-    assert jobs_mock == jobs_sorted_by_date_posted
+    sort_by(jobs_mock, 'min_salary')
+    assert jobs_mock == jobs_sorted_by_min_salary
 
     sort_by(jobs_mock, 'max_salary')
     assert jobs_mock == jobs_sorted_by_max_salary
 
-    sort_by(jobs_mock, 'min_salary')
-    assert jobs_mock == jobs_sorted_by_min_salary
+    sort_by(jobs_mock, 'date_posted')
+    assert jobs_mock == jobs_sorted_by_date_posted
 
     with pytest.raises(ValueError, match='invalid sorting criteria: xablau'):
         sort_by(jobs_mock, 'xablau')
