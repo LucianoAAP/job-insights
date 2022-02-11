@@ -9,4 +9,5 @@ def read(path):
         jobs = csv.DictReader(file)
         for job in jobs:
             jobs_list.append(job)
+
     return jobs_list
